@@ -16,26 +16,12 @@
     <!-- 界面用 WPF -->
     <UseWPF>true</UseWPF>
 
-    <!-- 只为了托盘图标（NotifyIcon）。WPF 自己没有托盘控件 -->
-    <UseWindowsForms>true</UseWindowsForms>
-
-    <!-- 声明 DPI 感知，弹窗在 125%/150% 缩放的屏幕上才能定位准确 -->
-    <ApplicationManifest>app.manifest</ApplicationManifest>
-
-    <!-- exe 自己的图标 -->
-    <ApplicationIcon>Assets\tray.ico</ApplicationIcon>
-
-    <Version>0.1.0</Version>
-
-    <!-- WinForms 分析器会抱怨"DPI 设置别放 manifest"。
-         我们不采纳：界面是 WPF，DPI 必须由 manifest 声明 -->
-    <NoWarn>$(NoWarn);WFO0003</NoWarn>
+    
   </PropertyGroup>
 
+
   <ItemGroup>
-    <!-- 让托盘图标文件也出现在输出目录，运行时从磁盘读它 -->
-    <None Remove="Assets\tray.ico" />
-    <Content Include="Assets\tray.ico" CopyToOutputDirectory="PreserveNewest" />
+    <PackageReference Include="MouseKeyHook" Version="5.7.1" />
   </ItemGroup>
 
 </Project>

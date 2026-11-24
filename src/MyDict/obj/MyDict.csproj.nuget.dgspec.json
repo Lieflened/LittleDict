@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\nju\\LittleDict\\src\\MyDict\\MyDict.csproj": {
-      "version": "0.1.0",
+      "version": "1.0.0",
       "restore": {
         "projectUniqueName": "D:\\nju\\LittleDict\\src\\MyDict\\MyDict.csproj",
         "projectName": "MyDict",
@@ -45,6 +45,12 @@
         "net11.0-windows": {
           "framework": "net11.0-windows7.0",
           "targetAlias": "net11.0-windows",
+          "dependencies": {
+            "MouseKeyHook": {
+              "target": "Package",
+              "version": "[5.7.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -60,7 +66,7 @@
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             },
-            "Microsoft.WindowsDesktop.App": {
+            "Microsoft.WindowsDesktop.App.WPF": {
               "privateAssets": "none"
             }
           },

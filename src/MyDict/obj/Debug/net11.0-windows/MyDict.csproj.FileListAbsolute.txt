@@ -18,4 +18,8 @@ D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.pdb
 D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.genruntimeconfig.cache
 D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\ref\MyDict.dll
 D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.csproj.Up2Date
-D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\App.baml
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.csproj.AssemblyReference.cache
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MainWindow.g.cs
+D:\nju\LittleDict\src\MyDict\bin\Debug\net11.0-windows\Gma.System.MouseKeyHook.dll
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MainWindow.baml
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.sourcelink.json
