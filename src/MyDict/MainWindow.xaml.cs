@@ -1,16 +1,10 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System;
 using System.Threading;
-using System.Windows.Forms;
+//using System.Windows.Forms;
 using Gma.System.MouseKeyHook;
+
+using WinForms = System.Windows.Forms;
 
 namespace MyDict;
 
@@ -19,44 +13,51 @@ namespace MyDict;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private IKeyboardMouseEvents _globalHoock;
+    private IKeyboardMouseEvents? _globalHoock;
+    private readonly TranslationPopup _popup = new();
+
     public MainWindow()
     {
         InitializeComponent();
         SubscribeGlobalHook();
     }
+
     private void SubscribeGlobalHook()
     {
         _globalHoock = Hook.GlobalEvents();
         _globalHoock.MouseDoubleClick += OnGlobalDoubleClick;
     }
-    private void OnGlobalDoubleClick(object? sender, MouseEventArgs e)
+
+    private void OnGlobalDoubleClick(object? sender, WinForms.MouseEventArgs e)
     {
         Thread.Sleep(50);
         try
         {
             string oldClipboard = "";
-            if (System.Windows.Clipboard.ContainsText())
+            if (Clipboard.ContainsText())
             {
-                oldClipboard = System.Windows.Clipboard.GetText();
+                oldClipboard = Clipboard.GetText();
             }
-            SendKeys.SendWait("^c");
+            WinForms.SendKeys.SendWait("^c");
             Thread.Sleep(80);
 
-            string selectedText = System.Windows.Clipboard.ContainsText() ? System.Windows.Clipboard.GetText() : "";
+            string selectedText = Clipboard.ContainsText() ? Clipboard.GetText() : "";
 
             if (!string.IsNullOrEmpty(oldClipboard))
             {
-                System.Windows.Clipboard.SetText(oldClipboard);
+                Clipboard.SetText(oldClipboard);
             }
             if (string.IsNullOrWhiteSpace(selectedText))
             {
                 return;
             }
+
+            var cursorPos = CursorHelper.GetPositionInDips(this);
+
             Dispatcher.Invoke(
                 () =>
                 {
-                    DisplayTextBlock.Text = selectedText.Trim();
+                    _popup.ShowText(selectedText.Trim(), cursorPos);
                 }
             );
         }
@@ -67,7 +68,8 @@ public partial class MainWindow : Window
     protected override void OnClosed(EventArgs e)
     {
         // 释放全局钩子
-        _globalHoock.Dispose();
+        _globalHoock?.Dispose();
+        _popup.Close();
 
         base.OnClosed(e);
     }

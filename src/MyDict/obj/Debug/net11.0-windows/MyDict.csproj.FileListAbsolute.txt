@@ -23,3 +23,5 @@ D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MainWindow.g.cs
 D:\nju\LittleDict\src\MyDict\bin\Debug\net11.0-windows\Gma.System.MouseKeyHook.dll
 D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MainWindow.baml
 D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\MyDict.sourcelink.json
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\TranslationPopup.baml
+D:\nju\LittleDict\src\MyDict\obj\Debug\net11.0-windows\TranslationPopup.g.cs
