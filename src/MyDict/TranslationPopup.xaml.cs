@@ -1,3 +1,4 @@
+using System.Data;
 using System.Data.Common;
 using System.Windows;
 
@@ -10,9 +11,11 @@ public partial class TranslationPopup : Window
         InitializeComponent();
     }
 
-    public void ShowText(string text, Point cursorPositionInDips)
+    public void ShowText(string sourceText, Point cursorPositionInDips)
     {
-        ContentTextBlock.Text = text;
+        // ContentTextBlock.Text = sourceText;
+        SourceTextBlock.Text = sourceText;
+        TranslationTextBlock.Text = "";
         if (!IsVisible)
         {
             Left = -10000;
@@ -46,5 +49,15 @@ public partial class TranslationPopup : Window
 
         Left = left;
         Top = top;
+    }
+
+    public void SetStatus(string status)
+    {
+        TranslationTextBlock.Text = status;
+    }
+    public void SetTranslation(string translation)
+    {
+        TranslationTextBlock.Text = translation;
+        UpdateLayout();
     }
 }

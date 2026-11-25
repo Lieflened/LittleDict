@@ -13,9 +13,9 @@ namespace MyDict;
 /// </summary>
 public partial class MainWindow : Window
 {
-    private IKeyboardMouseEvents? _globalHoock;
+    private IKeyboardMouseEvents? _globalHook;
     private readonly TranslationPopup _popup = new();
-
+    private readonly TranslationService _translator = new();
     public MainWindow()
     {
         InitializeComponent();
@@ -24,13 +24,14 @@ public partial class MainWindow : Window
 
     private void SubscribeGlobalHook()
     {
-        _globalHoock = Hook.GlobalEvents();
-        _globalHoock.MouseDoubleClick += OnGlobalDoubleClick;
+        _globalHook = Hook.GlobalEvents();
+        _globalHook.MouseDoubleClick += OnGlobalDoubleClick;
     }
 
-    private void OnGlobalDoubleClick(object? sender, WinForms.MouseEventArgs e)
+    private async void OnGlobalDoubleClick(object? sender, WinForms.MouseEventArgs e)
     {
         Thread.Sleep(50);
+        string selectedText = "";
         try
         {
             string oldClipboard = "";
@@ -41,34 +42,48 @@ public partial class MainWindow : Window
             WinForms.SendKeys.SendWait("^c");
             Thread.Sleep(80);
 
-            string selectedText = Clipboard.ContainsText() ? Clipboard.GetText() : "";
+            selectedText = Clipboard.ContainsText() ? Clipboard.GetText() : "";
 
             if (!string.IsNullOrEmpty(oldClipboard))
             {
                 Clipboard.SetText(oldClipboard);
             }
-            if (string.IsNullOrWhiteSpace(selectedText))
-            {
-                return;
-            }
-
-            var cursorPos = CursorHelper.GetPositionInDips(this);
-
-            Dispatcher.Invoke(
-                () =>
-                {
-                    _popup.ShowText(selectedText.Trim(), cursorPos);
-                }
-            );
         }
-        catch 
+        catch
         {
+            return;
         }
+
+        if (string.IsNullOrWhiteSpace(selectedText))
+        {
+            return;
+        }
+
+        var cursorPos = CursorHelper.GetPositionInDips(this);
+
+        selectedText = selectedText.Trim();
+
+        Dispatcher.Invoke(
+            () =>
+            {
+                _popup.ShowText(selectedText, cursorPos);
+                _popup.SetStatus("翻译中...");
+            }
+        );
+
+        var translation = await _translator.TranslateAsync(selectedText);
+
+        Dispatcher.Invoke(
+            () =>
+            {
+                _popup.SetTranslation(translation);
+            }
+        );
     }
     protected override void OnClosed(EventArgs e)
     {
         // 释放全局钩子
-        _globalHoock?.Dispose();
+        _globalHook?.Dispose();
         _popup.Close();
 
         base.OnClosed(e);
