@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MyDict")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f1848048eec8b221c721dd82b3876fe4c1a697cd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a7c4d774b3b1f385894442f4eb938b16ea4e206d")]
 [assembly: System.Reflection.AssemblyProductAttribute("MyDict")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MyDict")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
